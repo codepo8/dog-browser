@@ -13,14 +13,10 @@
   </header>
   <section>
     <form>
-      <span>
         <label for="breed">Dog breed:</label>
-        <select name="breed" id="breed"></select>
-      </span>
-      <span id="subsection" class="hidden">
-        <label for="sub">sub breed:</label>
-        <select name="sub" id="sub"></select>
-      </span>
+        <input list="allbreeds" name="breed" id="breed"></input>
+        <datalist id="allbreeds">
+        </datalist>        
     </form>
     <button class="loading">
       <img src="" alt="Very likely a good boy/girl">
