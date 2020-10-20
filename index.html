@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐕</text></svg>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dogs! Lots of dogs!</title>
+  <link rel="stylesheet" href="treats.css">
+</head>
+<body>
+  <header>
+    <h1>Get dog pictures by breed 🐕</h1>
+  </header>
+  <section>
+    <form>
+      <span>
+        <label for="breed">Dog breed:</label>
+        <select name="breed" id="breed"></select>
+      </span>
+      <span id="subsection" class="hidden">
+        <label for="sub">sub breed:</label>
+        <select name="sub" id="sub"></select>
+      </span>
+    </form>
+    <button class="loading">
+      <img src="" alt="Very likely a good boy/girl">
+      <p>Click for more <span>Dogs</span>!</p>
+    </button>
+  </section>
+
+  <footer>
+    <p>
+      Powered by the <a href="https://dog.ceo/">excellent API</a> provided by 
+      <a href="https://dog.ceo/">Dog.ceo</a>. </p>
+      <p>Written by 
+      <a href="https://christianheilmann.com">Chris Heilmann</a> using a lot of 
+      fetch().      
+    </p>
+  </footer>
+
+  <script src="walkies.js"></script>  
+  
+</body>
+</html>
