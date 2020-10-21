@@ -29,6 +29,9 @@ img[src='']{
   display: none;
 }
 button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   cursor: pointer;
   border-radius: 10px;
   font-family: inherit;
@@ -42,8 +45,10 @@ button {
 }
 button.loading:after{
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   content: 'Loading...';
-  line-height: 200px;
   background: rgba(0,0,0,.5);
   color: white;
   position: absolute;
@@ -52,12 +57,23 @@ button.loading:after{
   right: 0;
   bottom: 0;
 }
-select {
+button div {
+  width: 40vw;
+  height: 40vh;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
+  border: 5px solid #000;
+}
+
+#breed {
   font-family: inherit;
   font-size: 1em;
   color: darkslategray;
-  background:silver;
-  border: none;
+  background:whitesmoke;
+  border: 1px solid darkolivegreen;
+  text-transform: capitalize;
 }
 .hidden {
   opacity: 0;
@@ -68,3 +84,4 @@ select {
 form {
   margin: 1em 0;
 }
+
