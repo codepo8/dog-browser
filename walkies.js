@@ -16,10 +16,10 @@ const findbreed = _ => {
 const seedbreedsform = _ => {
   let out = '';
   Object.keys(breeds).forEach(b => {
-    out += `<option value="${ucfirst(b)}">${ucfirst(b)}</option>`;
+    out += `<option value="${ucfirst(b)}"/>`;
     if (breeds[b].length > 0) {
       breeds[b].forEach(s => {
-        out += `<option value="${ucfirst(b)} - ${ucfirst(s)}">${ucfirst(b)} - ${ucfirst(s)}</option>`;
+        out += `<option value="${ucfirst(b)} - ${ucfirst(s)}"/>`;
       });
     }
   });
@@ -33,20 +33,36 @@ const ucfirst = str => {
 
 const getbreeds = _ => {
   fetch('https://dog.ceo/api/breeds/list/all')
-    .then(response => response.json())
-      .then(data => {
-        breeds = data.message;
-        seedbreedsform();
-  });
+  .then(status)
+  .then(data => {
+    breeds = data.message;
+    seedbreedsform();
+  })
+  .catch(error => {
+    console.log(error);
+  })  
+};
+
+const status = (response) => {
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw new Error(response.status);
+  }
 };
 
 const getdog = _ => {
+  button.classList.remove('error');
   button.classList.add('loading');
   fetch(url)
-    .then(response => response.json())
-      .then(data => {
-        imagecontainer.style.backgroundImage = `url(${data.message})`;
-        button.classList.remove('loading');
+  .then(status)
+  .then((data) => {
+    imagecontainer.style.backgroundImage = `url(${data.message})`;
+    button.classList.remove('loading');
+  })
+  .catch((error) => {
+    button.classList.remove('loading');
+    button.classList.add('error');
   });
 };
 

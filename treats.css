@@ -19,15 +19,6 @@ h1 {
 footer a {
   color: #000;
 }
-button img {
-  height: 60vh;
-  margin: 0 auto;
-  display: block;
-  border-radius: 10px;
-}
-img[src='']{
-  display: none;
-}
 button {
   display: flex;
   flex-direction: row;
@@ -57,6 +48,15 @@ button.loading:after{
   right: 0;
   bottom: 0;
 }
+button.error:before{
+  content: '⚠️ Oh no! No dogs found, try another breed!';
+  color: firebrick;
+  display: block;
+  max-width: 40vw;
+  margin: 5px;
+  border: 2px solid darkred;
+}
+
 button div {
   width: 40vw;
   height: 40vh;
@@ -66,7 +66,9 @@ button div {
   border-radius: 10px;
   border: 5px solid #000;
 }
-
+button p {
+  max-width: 40vw;
+}
 #breed {
   font-family: inherit;
   font-size: 1em;
