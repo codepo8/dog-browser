@@ -33,37 +33,29 @@ const ucfirst = str => {
 
 const getbreeds = _ => {
   fetch('https://dog.ceo/api/breeds/list/all')
-  .then(status)
+  .then(response => response.json())
   .then(data => {
     breeds = data.message;
     seedbreedsform();
   })
-  .catch(error => {
-    console.log(error);
-  })  
-};
-
-const status = (response) => {
-  if (response.ok) {
-    return response.json();
-  } else {
-    throw new Error(response.status);
-  }
 };
 
 const getdog = _ => {
   button.classList.remove('error');
   button.classList.add('loading');
   fetch(url)
-  .then(status)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      button.classList.remove('loading');
+      button.classList.add('error');
+    }
+  })
   .then((data) => {
     imagecontainer.style.backgroundImage = `url(${data.message})`;
     button.classList.remove('loading');
   })
-  .catch((error) => {
-    button.classList.remove('loading');
-    button.classList.add('error');
-  });
 };
 
 breed.addEventListener('change', findbreed);
