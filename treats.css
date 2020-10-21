@@ -59,7 +59,7 @@ button.error:before{
 
 button div {
   width: 40vw;
-  height: 40vh;
+  height: 30vw;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
