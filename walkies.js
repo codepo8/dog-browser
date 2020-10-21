@@ -1,7 +1,7 @@
 let breeds = {};
 let url = 'https://dog.ceo/api/breeds/image/random';
 let breed = document.querySelector('#breed');
-let imagecontainer = document.querySelector('button div');
+let imagecontainer = document.querySelector('button img');
 let breedname = document.querySelector('button span');
 let button = document.querySelector('button');
 
@@ -45,6 +45,7 @@ const getdog = _ => {
   button.classList.add('loading');
   fetch(url)
   .then(response => {
+    console.log(response);
     if (response.ok) {
       return response.json();
     } else {
@@ -53,12 +54,15 @@ const getdog = _ => {
     }
   })
   .then((data) => {
-    imagecontainer.style.backgroundImage = `url(${data.message})`;
+    imagecontainer.src = `${data.message}`;
     button.classList.remove('loading');
   })
 };
 
 breed.addEventListener('change', findbreed);
+document.querySelector('form').addEventListener('submit', e => {
+  e.preventDefault();
+});
 button.addEventListener('click', getdog);
 getdog();
 getbreeds();

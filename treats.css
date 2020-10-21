@@ -9,18 +9,14 @@ body  {
 header,section,footer{
   display: block;
 }
-footer {
-  font-size: .8em;
-}
 h1 {
   margin: .5em 0;
   font-size: 1.5em;
 }
-footer a {
-  color: #000;
-}
 button {
+  width: 40vw;
   display: flex;
+  min-height: 50vh;
   flex-direction: row;
   justify-content: center;
   cursor: pointer;
@@ -56,15 +52,13 @@ button.error:before{
   margin: 5px;
   border: 2px solid darkred;
 }
-
-button div {
-  width: 40vw;
-  height: 30vw;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+button img {
   border-radius: 10px;
   border: 5px solid #000;
+  width: 95%;
+  margin: 0 auto;
+  height: auto;
+  object-fit: cover;
 }
 button p {
   max-width: 40vw;
@@ -77,13 +71,16 @@ button p {
   border: 1px solid darkolivegreen;
   text-transform: capitalize;
 }
-.hidden {
-  opacity: 0;
-}
 #breed, #sub, button span {
   text-transform: capitalize;
 }
 form {
   margin: 1em 0;
+}
+footer {
+  font-size: .8em;
+}
+footer a {
+  color: #000;
 }
 
