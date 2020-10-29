@@ -11,37 +11,38 @@ h1 {
   margin: .5em 0;
   font-size: 1.2em;
 }
-form { margin: .5em 0; }
+h2 {margin:0 0 .5em 0;font-size: 1.1em}
+form,.button p { margin: .5em 0; }
+
 button {
   max-width: 90vw;
-  width: 100%;
   min-height: 50vh;
-  display: flex;
-  text-align: center;
-  flex-direction: row;
-  justify-content: center;
+  width: 100%;
   cursor: pointer;
+  position: relative;
+  text-align: center;
   border-radius: 10px;
   font-family: inherit;
   font-size: .8em;
-  display: block;
   margin: 10px auto;
   padding: 10px;
   border: none;
   background: burlywood;
-  position: relative;
 }
-button p { margin: 5px 0; }
+
 button img {
   border-radius: 10px;
-  border: 5px solid #000;
   margin: 0 auto;
-  height: auto;
   object-fit: contain;
   max-height: 60vh;
+  min-height: 200px;
   max-width: 90%;
 }
-button.loading:after{
+button.loading img {
+  opacity: 0;
+}
+
+button.loading:after {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -55,7 +56,7 @@ button.loading:after{
   right: 0;
   bottom: 0;
 }
-button.loading img { opacity: 0; }
+
 button.error:before {
   content: '⚠️ Oh no! No dogs found, try another breed!';
   color: firebrick;
@@ -63,9 +64,11 @@ button.error:before {
   margin: 5px;
   border: 2px solid darkred;
 }
+
 footer { font-size: .6em; }
 footer a { color: #000; }
 footer p { margin: 5px 0 0 0;}
+
 @media (min-width:600px) {
   section {
     display: flex;
