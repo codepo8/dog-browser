@@ -1,50 +1,54 @@
 body  {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 24px;
-  font-size: calc(1em * 2vw);
+  font-size: calc(1em + 1vw);
   background: blanchedalmond;
   color: darkolivegreen;
   text-align: center;
 }
-header,section,footer{
-  display: block;
-}
-footer {
-  font-size: .8em;
-}
+header,section,footer{ display: block; }
 h1 {
   margin: .5em 0;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
-footer a {
-  color: #000;
-}
-button img {
-  height: 60vh;
-  margin: 0 auto;
-  display: block;
-  border-radius: 10px;
-}
-img[src='']{
-  display: none;
-}
+h2 {margin:0 0 .5em 0;font-size: 1.1em}
+form,.button p { margin: .5em 0; }
+
 button {
+  max-width: 90vw;
+  min-height: 50vh;
+  width: 100%;
   cursor: pointer;
+  position: relative;
+  text-align: center;
   border-radius: 10px;
   font-family: inherit;
-  font-size: 1em;
-  display: block;
+  font-size: .8em;
   margin: 10px auto;
   padding: 10px;
   border: none;
   background: burlywood;
-  position: relative;
 }
-button.loading:after{
+
+button img {
   border-radius: 10px;
+  margin: 0 auto;
+  object-fit: contain;
+  max-height: 60vh;
+  min-height: 200px;
+  max-width: 90%;
+}
+button.loading img {
+  opacity: 0;
+}
+
+button.loading:after {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   content: 'Loading...';
-  line-height: 200px;
-  background: rgba(0,0,0,.5);
+  background: rgba(0,0,0,.8);
   color: white;
   position: absolute;
   top: 0;
@@ -52,19 +56,21 @@ button.loading:after{
   right: 0;
   bottom: 0;
 }
-select {
-  font-family: inherit;
-  font-size: 1em;
-  color: darkslategray;
-  background:silver;
-  border: none;
+
+button.error:before {
+  content: '⚠️ Oh no! No dogs found, try another breed!';
+  color: firebrick;
+  display: block;
+  margin: 5px;
+  border: 2px solid darkred;
 }
-.hidden {
-  opacity: 0;
-}
-#breed, #sub, button span {
-  text-transform: capitalize;
-}
-form {
-  margin: 1em 0;
+
+footer { font-size: .6em; }
+footer a { color: #000; }
+footer p { margin: 5px 0 0 0;}
+
+@media (min-width:600px) {
+  section {
+    display: flex;
+  }
 }

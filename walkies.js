@@ -1,70 +1,73 @@
-let breeds = {};
+const breed = document.querySelector('#breed');
+const imagecontainer = document.querySelector('button img');
+const breedinfo = document.querySelector('h2');
+const button = document.querySelector('button');
+const datalist = document.querySelector('#allbreeds');
 let url = 'https://dog.ceo/api/breeds/image/random';
-let breedsselector = document.querySelector('#breed');
-let subselector = document.querySelector('#sub');
-let subsection = document.querySelector('#subsection');
-let breedname = document.querySelector('button span');
-let button = document.querySelector('button');
 
-const findbreed = _ => {
-  let name = breedsselector.value;
-  if (breeds[breedsselector.value].length < 2) {
-    subselector.innerHTML = '';
-    subsection.classList.add('hidden');
-  } else {
-    subsection.classList.remove('hidden');
-    name += ' (all)';
-    seedsub(breeds[breedsselector.value]);
-  }
-  url = `https://dog.ceo/api/breed/${breedsselector.value}/images/random`;
-  breedname.innerHTML = name;
-  getdog();
-};
-
-const seedsub = members => {
-  let out = '<option value="all">all</option>';
-  members.forEach(m => {
-    out += `<option value="${m}">${m}</option>`;
-  });
-  subselector.innerHTML = out;
-};
-
-const seedbreedsform = _ => {
-  let out = '';
-  Object.keys(breeds).forEach(b => {
-    out += `<option value="${b}">${b}</option>`;
-  });
-  document.querySelector('#breed').innerHTML = out;
-};
-
-const findsub = _ => {
-  breedname.innerHTML = `${subselector.value} ${breedsselector.value}`;
-  url = `https://dog.ceo/api/breed/${breedsselector.value}/${subselector.value}/images/random`;
-  getdog();
-
-};
 
 const getbreeds = _ => {
   fetch('https://dog.ceo/api/breeds/list/all')
-    .then(response => response.json())
-      .then(data => {
-        breeds = data.message;
-        seedbreedsform();
-  });
+  .then(response => response.json())
+  .then(data => {
+    seedbreedsform(data.message);
+  })
 };
+
+const ucfirst = str => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+const seedbreedsform = breeds => {
+  let out = '';
+  Object.keys(breeds).forEach(b => {
+    out += `<option value="${ucfirst(b)}"/>`;
+    breeds[b].forEach(s => {
+      out += `<option value="${ucfirst(b)} - ${ucfirst(s)}"/>`;
+    });
+  });
+  datalist.innerHTML = out;
+  breed.addEventListener('change', findbreed);
+};
+
+const findbreed = _ => {
+  let name = breed.value;
+  name = name.replace(' - ', '/').toLowerCase();
+  url = `https://dog.ceo/api/breed/${name}/images/random`
+  getdog(); 
+};
+
+imagecontainer.addEventListener('load', e => {
+  button.classList.remove('loading');
+});
 
 const getdog = _ => {
+  button.classList.remove('error');
   button.classList.add('loading');
   fetch(url)
-    .then(response => response.json())
-      .then(data => {
-        document.querySelector('img').src = data.message;
-        button.classList.remove('loading');
-  });
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      button.classList.remove('loading');
+      button.classList.add('error');
+    }
+  })
+  .then((data) => {
+    imagecontainer.src = `${data.message}`;
+    let bits = data.message.split('/');
+    bits = bits[bits.length-2]
+           .split('-')
+           .map(b => ucfirst(b))
+           .join(' - ');
+    breedinfo.innerText = bits;
+  })
 };
 
-breedsselector.addEventListener('change', findbreed);
-subselector.addEventListener('change', findsub);
 button.addEventListener('click', getdog);
+
+document.querySelector('form').addEventListener('submit', e => {
+  e.preventDefault();
+});
 getdog();
 getbreeds();
